@@ -45,7 +45,7 @@ const confirmSelected = () => {
 }
 
 const getFolderNameById = (id: number) => {
-  const searchFolder = (folders: Array<string>) => {
+  const searchFolder = (folders: any[]) : any[] | null => {
     for (const folder of folders) {
       if (folder.id === id) {
         return folder.name

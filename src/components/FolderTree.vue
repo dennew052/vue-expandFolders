@@ -2,15 +2,26 @@
 
 import { inject } from 'vue'
 
-const { selectedFolderIdTemp, selectFolderIdTemp } = inject('folderTree')
+const { selectedFolderIdTemp, selectFolderIdTemp } = inject<{
+  selectedFolderIdTemp: string;
+  selectFolderIdTemp: (id: string) => void;
+}>('folderTree') || { selectedFolderIdTemp: '', selectFolderIdTemp: () => {} };
 
 const props = defineProps({
-  folders: Array<string>
+  folders: Object
 })
 
-const toggleFolder = (folder: any) => {
-  folder.open = !folder.open;
+interface Folder {
+  open?: boolean;
 }
+
+const toggleFolder = (folder: Folder) => {
+  if (folder.open === undefined) {
+    folder.open = true;
+  } else {
+    folder.open = !folder.open;
+  }
+};
 
 </script>
 
